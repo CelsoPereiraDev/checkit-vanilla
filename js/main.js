@@ -1,14 +1,28 @@
 const $form = document.getElementById('form-tasks')
 
-const addTask = (title) => {
+const handleCheckboxChange = (event) => {
+  const $checkbox = event.target
+  const $li = $checkbox.parentElement.parentElement
+  const $tasksList = document.getElementById('list-todo')
+  const $tasksDoneList = document.getElementById('list-done')
 
-//   const taskHTML =  `<li class="tasks-section__item">
-//   <label class="tasks-section__item__label" >
-//     <input type="checkbox" class="tasks-section__item__checkbox">
-//     <span class="tasks-section__item__text">${title}</span>
-//   </label>
-//   <button type="button" class="tasks-section__item__remove">X</button>
-// </li>`  
+  if($checkbox.checked) {  
+    $tasksDoneList.append($li)
+  } else {
+    $tasksList.append($li)
+  }
+}
+
+const handleItemRemove = (event) => {
+  const $removeButton = event.target
+  const $li = $removeButton.parentElement
+  const $currentList = $li.parentElement
+
+  $currentList.removeChild($li)
+
+}
+
+const addTask = (title) => {
 
 // Criar Item (li)
   const $li = document.createElement('li')
@@ -21,10 +35,10 @@ const addTask = (title) => {
   $li.append($label)
 
 //Criar input (input)
-  const $input = document.createElement('input')
-  $input.classList.add('tasks-section__item__checkbox')
-  $input.setAttribute('type', 'checkbox')
-  $label.append($input)
+  const $checkbox = document.createElement('input')
+  $checkbox.classList.add('tasks-section__item__checkbox')
+  $checkbox.setAttribute('type', 'checkbox')
+  $label.append($checkbox)
 
 //Criar span (span)
   const $span = document.createElement('span')
@@ -41,10 +55,12 @@ const addTask = (title) => {
  // Adicionar item na lista To-do
   const $tasksList = document.getElementById('list-todo')
   $tasksList.append($li)
-  
-//  $tasksList.insertAdjacentHTML('beforeend',taskHTML)
 
+  // Adicionar eventos
+$checkbox.addEventListener('change', handleCheckboxChange)
   
+//Remover eventos
+$removeButton.addEventListener('click', handleItemRemove)
 }
 
 const handleFormSubmit = (event) => {
@@ -54,7 +70,9 @@ const handleFormSubmit = (event) => {
 
  
     addTask(title)
+    $form.reset()
     
 }
 
 $form.addEventListener('submit', handleFormSubmit)
+
