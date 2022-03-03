@@ -16,7 +16,7 @@
         <form class="form" id="form-tasks">
           <div class="form__field">
             <label class="form__field__label">New Task</label>
-            <input type="text" name="title" class="form__field__input">
+            <input required type="text" name="title" class="form__field__input">
             <button type="submit" class="form__button">Add</button>
           </div>
         </form>
@@ -27,7 +27,7 @@
               <ul class="tasks-section__list" id="list-todo">
                 <li class="tasks-section__item">
                   <label class="tasks-section__item__label" >
-                    <input type="checkbox" class="tasks-section__item__checkbox">
+                    <input type="checkbox" class="tasks-section__item__checkbox" name="task-completed">
                     <span class="tasks-section__item__text">Comprar coxinha</span>
                   </label>
                   <button type="button" class="tasks-section__item__remove">X</button>
